@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Common>
+		<!--数据库名称 -->
+		<database type="hhdb">
+			<!-- 数据库账号 -->
+			<username>dba</username>
+			<!-- 数据库密码  -->
+			<password>123456</password>
+			<!-- 数据库ip  -->
+			<serverIp>127.0.0.1</serverIp>
+			<!-- 数据库端口号  -->
+			<serverPort>1432</serverPort>
+			<!-- 数据库名  -->
+			<databaseName>hhdb</databaseName>
+			<!-- 数据库相关  -->
+			<driver>org.hhdbsql.Driver</driver>
+		</database>
+	</Common>		
+</Config>

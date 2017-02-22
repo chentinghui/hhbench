@@ -1,0 +1,2 @@
+select * from pgbench_history where tid = 8;
+select * from pgbench_history where tid = 9;

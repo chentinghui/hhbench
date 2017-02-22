@@ -1,0 +1,63 @@
+<project name="database" default="dist" basedir=".">
+	<description>恒辉数据库测试工具</description>
+
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist"  location="hhbench"/>
+	<property name="lib"  location="lib"/>
+	
+	<path id="classpath">
+		<fileset dir="${lib}" includes="**/*.jar"/>
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath"  debug="true">
+			<compilerarg line="-encoding UTF-8 " />
+		</javac>
+		<copy todir="./build/lib"> 
+			<fileset dir="./lib"/> 
+		</copy>
+	</target>
+
+	<target name="dist" depends="clean,compile" description="编译打包WEB应用程序">
+	
+		
+		<!-- 生成依赖包相对路径 空格隔开 -->
+		<pathconvert property="libs.path" pathsep=" ">
+			<mapper>
+				<chainedmapper>
+					<!-- 移除绝对路径 -->
+					<flattenmapper />
+					<!-- 加上lib前缀 -->
+					<globmapper from="*" to="lib/*" />
+				</chainedmapper>
+			</mapper>
+			<path>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset >
+			</path >
+		</pathconvert >
+		<jar jarfile="${dist}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="main.CaseMain" />
+				<attribute name="Class-Path" value="${libs.path} conf/" />
+			</manifest>
+		</jar>
+		
+	</target>
+
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete file="${dist}.jar"/>
+	</target>
+
+</project>
